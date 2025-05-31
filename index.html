@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Kritik & Saran - Veritas Studio Creative</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      animation: gradientBG 15s ease infinite;
+      color: #fff;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    header {
+      margin-bottom: 20px;
+    }
+
+    header img {
+      width: 80px;
+      height: auto;
+      margin-bottom: 10px;
+    }
+
+    header h1 {
+      font-size: 1.6em;
+      color: #00aaff;
+      letter-spacing: 1px;
+    }
+
+    .form-container {
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(10px);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0, 162, 255, 0.4);
+      width: 100%;
+      max-width: 400px;
+      transition: all 0.3s ease;
+    }
+
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-weight: 600;
+      color: #00aaff;
+    }
+
+    input, textarea, button {
+      width: 100%;
+      margin-top: 10px;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      font-size: 1em;
+      transition: 0.3s;
+    }
+
+    input, textarea {
+      background-color: #111;
+      color: #fff;
+      border: 1px solid #00aaff;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      box-shadow: 0 0 8px #00aaff;
+    }
+
+    button {
+      background: linear-gradient(90deg, #00aaff, #005f88);
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+    }
+
+    button:hover {
+      box-shadow: 0 0 10px #00aaff, 0 0 20px #00aaff inset;
+    }
+
+    #status {
+      text-align: center;
+      margin-top: 15px;
+      font-style: italic;
+    }
+
+    footer {
+      margin-top: 30px;
+      font-size: 0.85em;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="veritas.png" alt="Logo Veritas Studio">
+    <h1>Veritas Studio Creative</h1>
+  </header>
+
+  <div class="form-container">
+    <h2>Kritik & Saran</h2>
+    <form id="kritikForm">
+      <input type="text" name="nama" placeholder="Nama (opsional)">
+      <textarea name="pesan" placeholder="Tuliskan kritik atau saran Anda..." required rows="5"></textarea>
+      <button type="submit">Kirim</button>
+    </form>
+    <p id="status"></p>
+  </div>
+
+  <footer>
+    &copy; <span id="year"></span> Veritas Studio Creative. All rights reserved.
+  </footer>
+
+  <script>
+    const scriptURL = "https://script.google.com/macros/s/AKfycbz3qwSVVNphdefo0mEbfxR7nHvSUMJ-GfWAw_y71orkEgAtceeHy0WVInsIlh702oEX/exec"
+    const form = document.getElementById("kritikForm");
+    const status = document.getElementById("status");
+
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+      status.textContent = "Mengirim...";
+      fetch(scriptURL, {
+        method: "POST",
+        body: new FormData(form)
+      })
+      .then(response => {
+        status.textContent = "🎉 Terima kasih! Kritik Anda sudah dikirim.";
+        form.reset();
+      })
+      .catch(error => {
+        status.textContent = "❌ Gagal mengirim. Coba lagi nanti.";
+      });
+    });
+
+    // Tahun otomatis
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
