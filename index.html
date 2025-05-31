@@ -7,6 +7,11 @@
   <style>
     :root {
       font-size: 16px;
+      --primary-color: #00aaff;
+      --secondary-color: #005f88;
+      --background-dark: #0f2027;
+      --background-medium: #203a43;
+      --background-light: #2c5364;
     }
 
     * {
@@ -21,10 +26,11 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      align-items: center;
+      background: linear-gradient(135deg, var(--background-dark), var(--background-medium), var(--background-light));
       color: #fff;
-      padding: 0;
-      margin: 0;
+      padding: 20px;
+      line-height: 1.5;
     }
 
     @keyframes gradientBG {
@@ -33,49 +39,50 @@
       100% { background-position: 0% 50%; }
     }
 
+    body {
+      background-size: 200% 200%;
+      animation: gradientBG 15s ease infinite;
+    }
+
     header {
-      padding: 1.5rem 1rem 0;
-      align-items: center;
       text-align: center;
-      margin-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+      width: 100%;
+      max-width: 500px;
     }
 
     header img {
-      margin: 0 auto;
+      width: 80px;
+      height: auto;
+      margin-bottom: 0.8rem;
     }
 
     header h1 {
-      text-align: center;
-      width: 100%;
-    }
-
-    main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      padding: 0 1rem 1rem;
-      width: 100%;
+      font-size: 1.6rem;
+      color: var(--primary-color);
+      margin-bottom: 0.5rem;
     }
 
     .form-container {
       background: rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(8px);
-      padding: 1.5rem 1rem;
+      backdrop-filter: blur(10px);
+      padding: 2rem;
       border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0, 162, 255, 0.3);
+      box-shadow: 0 4px 20px rgba(0, 162, 255, 0.3);
       width: 100%;
-      margin: 0 auto;
+      max-width: 500px;
+      margin-bottom: 2rem;
     }
 
     .form-container h2 {
       text-align: center;
       margin-bottom: 1.5rem;
-      font-size: 1.3rem;
-      color: #00aaff;
+      font-size: 1.4rem;
+      color: var(--primary-color);
     }
 
     .form-group {
-      margin-bottom: 1.2rem;
+      margin-bottom: 1.5rem;
     }
 
     input, textarea {
@@ -91,19 +98,19 @@
 
     textarea {
       min-height: 150px;
-      resize: none;
+      resize: vertical;
     }
 
     input:focus, textarea:focus {
       outline: none;
-      border-color: #00aaff;
-      box-shadow: 0 0 0 2px rgba(0, 170, 255, 0.3);
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(0, 170, 255, 0.2);
     }
 
     button {
       width: 100%;
       padding: 1rem;
-      background: linear-gradient(to right, #00aaff, #0088cc);
+      background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
       color: white;
       font-weight: bold;
       border: none;
@@ -113,62 +120,65 @@
       transition: all 0.2s;
     }
 
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 170, 255, 0.4);
+    }
+
     button:active {
-      transform: scale(0.98);
-      background: linear-gradient(to right, #0088cc, #006699);
+      transform: translateY(0);
     }
 
     #status {
       text-align: center;
-      margin-top: 1rem;
-      font-size: 0.9rem;
-      min-height: 1.2rem;
+      margin-top: 1.2rem;
+      font-size: 0.95rem;
+      min-height: 1.4rem;
     }
 
     footer {
-      padding: 1rem;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       color: #aaa;
       text-align: center;
+      margin-top: auto;
+      padding: 1rem;
+      width: 100%;
     }
 
-    /* Responsive khusus untuk mobile */
+    /* Responsive Adjustments */
     @media (max-width: 768px) {
       :root {
-        font-size: 18px; /* Ukuran font lebih besar di mobile */
+        font-size: 15px;
       }
       
       body {
-        background-size: 200% 200%;
-        animation: gradientBG 10s ease infinite;
-      }
-      
-      header {
-        padding-top: 1rem;
+        padding: 15px;
       }
       
       header img {
-        width: 50px;
+        width: 70px;
       }
       
       .form-container {
-        padding: 1.2rem 1rem;
-        border-radius: 10px;
-      }
-      
-      input, textarea {
-        padding: 0.9rem;
-        font-size: 1rem;
-      }
-      
-      button {
-        padding: 1rem;
+        padding: 1.5rem;
       }
     }
 
     @media (max-width: 480px) {
       :root {
-        font-size: 16px;
+        font-size: 14px;
+      }
+      
+      header h1 {
+        font-size: 1.4rem;
+      }
+      
+      .form-container {
+        padding: 1.2rem;
+      }
+      
+      input, textarea, button {
+        padding: 0.9rem;
       }
       
       textarea {
@@ -184,21 +194,19 @@
     <h1>Veritas Studio Creative</h1>
   </header>
 
-  <main>
-    <div class="form-container">
-      <h2>Kritik & Saran</h2>
-      <form id="kritikForm">
-        <div class="form-group">
-          <input type="text" name="nama" placeholder="Nama (opsional)" aria-label="Nama Anda">
-        </div>
-        <div class="form-group">
-          <textarea name="pesan" placeholder="Tuliskan kritik atau saran Anda..." required rows="5" aria-label="Pesan kritik dan saran"></textarea>
-        </div>
-        <button type="submit">Kirim</button>
-      </form>
+  <div class="form-container">
+    <h2>Kritik & Saran</h2>
+    <form id="kritikForm">
+      <div class="form-group">
+        <input type="text" name="nama" placeholder="Nama (opsional)" aria-label="Nama Anda">
+      </div>
+      <div class="form-group">
+        <textarea name="pesan" placeholder="Tuliskan kritik atau saran Anda..." required aria-label="Pesan kritik dan saran"></textarea>
+      </div>
+      <button type="submit">Kirim</button>
       <p id="status"></p>
-    </div>
-  </main>
+    </form>
+  </div>
 
   <footer>
     &copy; <span id="year"></span> Veritas Studio Creative. All rights reserved.
@@ -207,14 +215,20 @@
   <script>
     const scriptURL = "https://script.google.com/macros/s/AKfycbz3qwSVVNphdefo0mEbfxR7nHvSUMJ-GfWAw_y71orkEgAtceeHy0WVInsIlh702oEX/exec";
     const form = document.getElementById("kritikForm");
-    const status = document.getElementById("status");
+    const status = document.getElementById("year");
 
+    // Set tahun di footer
     document.getElementById("year").textContent = new Date().getFullYear();
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalBtnText = submitBtn.textContent;
       
-      status.textContent = "Mengirim...";
+      // Update UI
+      submitBtn.textContent = "Mengirim...";
+      submitBtn.disabled = true;
+      status.textContent = "Mengirim pesan Anda...";
       status.style.color = "#fff";
       
       try {
@@ -224,7 +238,7 @@
         });
         
         if (response.ok) {
-          status.textContent = "✓ Terima kasih! Pesan terkirim.";
+          status.textContent = "✓ Terima kasih! Pesan Anda telah terkirim.";
           status.style.color = "#00ff88";
           form.reset();
           
@@ -235,8 +249,11 @@
           throw new Error('Gagal mengirim');
         }
       } catch (error) {
-        status.textContent = "✗ Gagal mengirim. Coba lagi.";
+        status.textContent = "✗ Gagal mengirim. Silakan coba lagi nanti.";
         status.style.color = "#ff5555";
+      } finally {
+        submitBtn.textContent = originalBtnText;
+        submitBtn.disabled = false;
       }
     });
   </script>
